@@ -1,14 +1,26 @@
-name: ST-BoilerPlate # TODO: 수정
-main: net.starly.boilerplate.BoilerPlateMain # TODO: 수정
+name: ST-Cheque
+main: net.starly.cheque.ChequeMain
 author: Starly Team
 website: http://starly.kr/discord
 
-description: BoilerPlate Plugin. # TODO: 수정
+description: Cheque Plugin.
 
 softdepend:
   - ST-Core
+  - Vault
 
 version: 1.0
 api-version: 1.13
 
+permissions:
+  starly.cheque.reload:
+    description: 수표 콘피그 리로드 권한
+    default: op
+  starly.cheque.create:
+    description: 수표를 뽑을 수 있는 권한
+    default: true
+
 commands:
+  cheque:
+    aliases: [ 수표 ]
+    description: 수표 명령어

@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'net.starly.boilerplate' // TODO: 수정
+group 'net.starly.cheque'
 version '1.0'
 
 repositories {
@@ -11,6 +11,7 @@ repositories {
         url = "http://starly.kr:8083/repository/maven-public/"
         allowInsecureProtocol = true
     }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -21,7 +22,8 @@ dependencies {
     compileOnly "org.spigotmc:spigot-api:R0.1:1.12.2"
 
     // OTHER DEPENDENCIES
-    compileOnly "net.starly.core:ST-Core:1.6.5"
+    compileOnly "net.starly.core:ST-Core:1.6.6"
+    compileOnly "com.github.MilkBowl:VaultAPI:1.7.1"
 }
 
 tasks.withType(JavaCompile) {
