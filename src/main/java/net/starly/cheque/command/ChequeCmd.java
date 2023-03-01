@@ -49,11 +49,11 @@ public class ChequeCmd implements CommandExecutor {
                 return false;
             }
 
-
-            int money, amount;
+            long money;
+            int amount;
 
             try {
-                money = Integer.parseInt(args[1]);
+                money = Long.parseLong(args[1]);
                 amount = Integer.parseInt(args[2]);
             } catch (NumberFormatException e) {
                 player.sendMessage(MessageContent.getInstance().getMessageAfterPrefix(MessageContent.MessageType.ERROR, "noNumber"));
