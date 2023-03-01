@@ -71,7 +71,7 @@ public class ChequeCmd implements CommandExecutor {
             }
 
             player.getInventory().addItem(ChequeItemUtil.getChequeItem(money, amount));
-            ChequeMain.getEconomy().withdrawPlayer(player, ChequeMain.getEconomy().getBalance(player) - money * amount);
+            ChequeMain.getEconomy().withdrawPlayer(player,money * amount);
             player.sendMessage(MessageContent.getInstance().getMessageAfterPrefix(MessageContent.MessageType.NORMAL, "createCheque")
                     .replace("{money}", String.valueOf(money)));
             return true;

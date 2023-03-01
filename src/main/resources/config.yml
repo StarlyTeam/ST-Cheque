@@ -48,3 +48,12 @@ cheque:
 
   # 아이템 종류
   material: PAPER
+
+  # 아이템 이름
+  displayname: "&a[수표] &6{money}&f원"
+
+  # 아이템 로어
+  lore:
+    - ""
+    - "&6[!] &f우클릭 시, &6{money}&f원을 지급 받습니다."
+    - ""
