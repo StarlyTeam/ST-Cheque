@@ -8,7 +8,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("all")
 public class MessageContent {
 
     public enum MessageType {
@@ -55,6 +54,7 @@ public class MessageContent {
 
     public String getMessage(MessageType type, String key) { return (String) map.get(type).get(key); }
 
+    @SuppressWarnings("unchecked")
     public List<String> getMessages(MessageType type, String key) { return (List<String>) map.get(type).get(key); }
 
     public String getMessageAfterPrefix(MessageType type, String key) {

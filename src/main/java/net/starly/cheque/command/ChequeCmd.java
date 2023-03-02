@@ -15,12 +15,13 @@ public class ChequeCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player player = (Player) sender;
 
         if (!(sender instanceof Player)) {
             sender.sendMessage(MessageContent.getInstance().getMessageAfterPrefix(MessageContent.MessageType.ERROR, "noConsole"));
             return false;
         }
+
+        Player player = (Player) sender;
 
         if (args.length == 0) {
             player.sendMessage(MessageContent.getInstance().getMessageAfterPrefix(MessageContent.MessageType.ERROR, "wrongCommand"));

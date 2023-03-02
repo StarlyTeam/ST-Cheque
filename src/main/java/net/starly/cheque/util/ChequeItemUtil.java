@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 public class ChequeItemUtil {
 
+    @SuppressWarnings("ConstantConditions")
     public static ItemStack getChequeItem(long money, int amount) {
         ItemStack itemStack = new ItemStack(Material.valueOf(MessageContent.getInstance().getMessage(MessageContent.MessageType.CHEQUE, "material")), amount);
         ItemStackWrapper itemStackWrapper = NmsItemStackUtil.getInstance().asNMSCopy(itemStack);
