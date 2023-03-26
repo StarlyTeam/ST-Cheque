@@ -30,10 +30,10 @@ public class PlayerInteractListener implements Listener {
         NBTTagCompoundWrapper nbtTagCompoundWrapper = itemStackWrapper.getTag();
 
         if (nbtTagCompoundWrapper == null) return;
-        event.setCancelled(true);
 
         String stringNumber = nbtTagCompoundWrapper.getString("cheque");
         if (stringNumber == null || stringNumber.isEmpty()) return;
+        event.setCancelled(true);
 
         ChequeMain.getEconomy().depositPlayer(player, Long.parseLong(stringNumber));
         itemStack.setAmount(itemStack.getAmount() - 1);
