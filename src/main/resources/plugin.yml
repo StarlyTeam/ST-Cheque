@@ -1,7 +1,7 @@
 name: ST-Cheque
 main: net.starly.cheque.ChequeMain
 author: Starly Team
-website: http://starly.kr/discord
+website: http://starly.kr/
 
 description: Cheque Plugin.
 
@@ -9,7 +9,7 @@ softdepend:
   - ST-Core
   - Vault
 
-version: 1.0.3
+version: 1.0.4
 api-version: 1.13
 
 permissions:
@@ -22,5 +22,5 @@ permissions:
 
 commands:
   cheque:
-    aliases: [ 수표 ]
     description: 수표 명령어
+    aliases: [ 수표 ]
