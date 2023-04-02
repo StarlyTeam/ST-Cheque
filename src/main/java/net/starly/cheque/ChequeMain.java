@@ -15,20 +15,26 @@ import java.io.File;
 public class ChequeMain extends JavaPlugin {
 
     private static ChequeMain instance;
-    private static Economy economy = null;
+    private static Economy economy;
 
     @Override
     public void onEnable() {
-        if (Bukkit.getPluginManager().getPlugin("ST-Core") == null) {
+        if (!isPluginEnabled("net.starly.core.StarlyCore")) {
             Bukkit.getLogger().warning("[" + getName() + "] ST-Core 플러그인이 적용되지 않았습니다! 플러그인을 비활성화합니다.");
-            Bukkit.getLogger().warning("[" + getName() + "] 다운로드 링크 : http://starly.kr/discord");
+            Bukkit.getLogger().warning("[" + getName() + "] 다운로드 링크 : §fhttp://starly.kr/");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
-
-        if (!setupEconomy()) {
+        if (!isPluginEnabled("net.milkbowl.vault.Vault")) {
             Bukkit.getLogger().warning("[" + getName() + "] Vault 플러그인이 적용되지 않았습니다! 플러그인을 비활성화합니다.");
             Bukkit.getLogger().warning("[" + getName() + "] 다운로드 링크 : https://www.spigotmc.org/resources/vault.34315/");
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
+        economy = getServer().getServicesManager().getRegistration(Economy.class).getProvider();
+        if (economy == null) {
+            Bukkit.getLogger().warning("[" + getName() + "] Vault와 연동되는 Economy 플러그인이 적용되지 않았습니다! 플러그인을 비활성화합니다.");
+            Bukkit.getLogger().warning("[" + getName() + "] 다운로드 링크 : https://essentialsx.net/downloads.html");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
@@ -37,26 +43,14 @@ public class ChequeMain extends JavaPlugin {
         new Metrics(this, 17831);
 
         // CONFIG
-        if (!new File("config.yml").exists()) saveDefaultConfig();
+        saveDefaultConfig();
         MessageContent.getInstance().initializing(getConfig());
 
 
-        Bukkit.getPluginCommand("수표").setExecutor(new ChequeCmd());
-        Bukkit.getPluginCommand("수표").setTabCompleter(new ChequeTab());
+        Bukkit.getPluginCommand("cheque").setExecutor(new ChequeCmd());
+        Bukkit.getPluginCommand("cheque").setTabCompleter(new ChequeTab());
 
         Bukkit.getPluginManager().registerEvents(new PlayerInteractListener(), this);
-    }
-
-    private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
-        }
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null) {
-            return false;
-        }
-        economy = rsp.getProvider();
-        return economy != null;
     }
 
     public static Economy getEconomy() {
@@ -65,5 +59,14 @@ public class ChequeMain extends JavaPlugin {
 
     public static ChequeMain getInstance() {
         return instance;
+    }
+
+    private boolean isPluginEnabled(String path) {
+        try {
+            Class.forName(path);
+            return true;
+        } catch (NoClassDefFoundError ignored) {
+        } catch (Exception ex) { ex.printStackTrace(); }
+        return false;
     }
 }
